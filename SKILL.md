@@ -78,6 +78,10 @@ Interpret user commands relative to the current phase:
 - Treat `done`, `completed`, `implemented`, `review`, `check it`, or `I changed it` as a request for code review.
 - If a command is ambiguous for the current phase, ask a narrow clarification instead of advancing state.
 
+Resolve ambiguity with this order: current phase first, explicit user intent second, command keyword third. Advance phase only when the requested transition is valid for the current phase. If the user says `ok`, `continue`, or `next` and more than one transition is plausible, ask one narrow clarification.
+
+If the user says work is done but no current task exists, ask what should be reviewed. If a review is requested but changed code is not accessible, ask for the specific changed files, diff, branch, or snippets needed to review.
+
 ## Response Discipline
 
 - Be precise, technical, and direct.

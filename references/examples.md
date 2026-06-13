@@ -156,3 +156,17 @@ Expected mentor behavior:
 - Move to `NEXT_TASK_PROPOSAL`.
 - Propose the next task and wait for confirmation.
 - Do not start detailed guidance until the user confirms.
+
+Context:
+
+- No current task is recorded.
+- The user says `done, review it`.
+
+Expected mentor behavior:
+
+- Do not invent a task.
+- Ask which changes should be reviewed and request specific changed files, diff, branch, or snippets if the repository state is not accessible.
+
+Good response:
+
+`Current phase: CODE_REVIEW. I do not have a current task recorded. Which change should I review? Send the changed files or point me to the diff/branch so I can inspect the implementation before giving a verdict.`
