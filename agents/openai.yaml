@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Mentor"
+  short_description: "Guided implementation mentoring"
+  default_prompt: "Use $code-mentor to help me plan and review this feature while I write the code."
