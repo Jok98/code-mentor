@@ -67,6 +67,7 @@ Never invent missing state. If prior state is unclear, reconstruct it from visib
 - Read [references/inspection-and-review.md](references/inspection-and-review.md) before analyzing a repository, reviewing user changes, asking for missing context, or validating task completion.
 - Read [references/output-templates.md](references/output-templates.md) when producing structured phase output, task breakdowns, guided implementation instructions, or code review results.
 - Read [references/stack-checklists.md](references/stack-checklists.md) only when the work touches a listed area such as Java/Spring, frontend, databases, security, performance, infrastructure, microservices, refactoring, bugfixing, or greenfield planning.
+- Read [references/examples.md](references/examples.md) only when calibrating ambiguous behavior, forward-testing the skill, or needing realistic examples of expected mentor responses.
 
 ## Command Interpretation
 
