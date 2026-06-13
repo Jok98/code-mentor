@@ -2,6 +2,62 @@
 
 Use this reference to run the guided implementation loop.
 
+## State Contract
+
+Maintain a compact state ledger from the first substantive response until the workflow ends.
+
+Track:
+
+- current phase;
+- technical objective;
+- approved high-level plan;
+- task list;
+- current task;
+- completed tasks;
+- tasks requiring rework;
+- important decisions;
+- rejected alternatives when they affect future work;
+- assumptions;
+- blockers or missing context;
+- next action.
+
+Update state before changing phase and after every review verdict.
+
+Show a brief state snapshot:
+
+- when entering a new phase;
+- after the high-level plan is approved;
+- after task breakdown;
+- after approving a task;
+- after requesting rework;
+- when scope changes;
+- after a long interruption or context resume;
+- when the user asks for status.
+
+Keep the snapshot short. Do not repeat the full state in every answer when it does not help the user.
+
+Suggested snapshot:
+
+```markdown
+State:
+- Phase: ...
+- Objective: ...
+- Approved plan: ...
+- Current task: ...
+- Completed: ...
+- Rework/blockers: ...
+- Next action: ...
+```
+
+Use `none`, `not approved yet`, or `unknown` instead of inventing missing details.
+
+If conversation state becomes unclear:
+
+- reconstruct it from visible conversation and repository evidence;
+- state what was recovered;
+- label unknowns;
+- ask one narrow clarification only when the next safe action depends on it.
+
 ## Phase Rules
 
 ### ANALYSIS
@@ -11,6 +67,7 @@ Trigger when the user provides a feature request, bugfix request, refactor reque
 Do:
 
 - restate the technical objective;
+- initialize or refresh the state ledger;
 - inspect available code when present;
 - identify relevant modules, files, classes, layers, tests, configuration, and infrastructure;
 - identify behavior, constraints, assumptions, risks, and likely validation areas;
@@ -47,6 +104,7 @@ Do:
 - respond to the concern;
 - compare trade-offs;
 - update the plan when needed;
+- update decisions, rejected alternatives, and assumptions in the state ledger;
 - explain consequences of alternatives;
 - ask for explicit approval again.
 
@@ -67,6 +125,8 @@ Approval examples in this phase:
 
 If the same words appear outside this phase, interpret them in context instead of assuming plan approval.
 
+When approval is clear, record the approved plan before moving to `TASK_BREAKDOWN`.
+
 ### TASK_BREAKDOWN
 
 Trigger only after plan approval.
@@ -83,6 +143,8 @@ Create ordered atomic tasks. Each task should include:
 - risk level when relevant.
 
 Tasks must be independently implementable and reviewable. Do not start Task 1 unless the user also asks to start it.
+
+Record the task list in state before asking which task to start.
 
 ### WAIT_FOR_TASK_SELECTION_OR_PROCEED_CONFIRMATION
 
@@ -124,6 +186,8 @@ If the user asks a question:
 
 If the user says work is done or asks for review, move to `CODE_REVIEW`.
 
+Keep the current task unchanged until review produces an approval verdict.
+
 ### CODE_REVIEW
 
 Trigger when the user reports completion or asks for review.
@@ -163,12 +227,14 @@ If rework is required:
 - keep the user on the same task;
 - explain the required correction verbally;
 - explain why it matters;
+- record the rework item and blocker in state;
 - ask the user to fix it and report back.
 
 If approved:
 
 - state why it is acceptable;
 - mark the task complete in conversation state;
+- clear resolved rework items for that task;
 - propose the next task;
 - do not start the next task until the user confirms.
 
@@ -185,6 +251,7 @@ If the user changes scope mid-flow:
 - pause the current task flow;
 - identify what changed;
 - explain impact on the approved plan and task list;
+- record the scope change in state;
 - update the plan if needed;
 - request approval before changing task sequence.
 

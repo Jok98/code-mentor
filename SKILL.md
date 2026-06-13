@@ -54,6 +54,14 @@ Start relevant responses with `Current phase: PHASE_NAME` when it helps the user
 
 Read [references/workflow.md](references/workflow.md) before running any multi-turn planning, task breakdown, guided implementation, or review flow.
 
+## State Contract
+
+Maintain a compact state ledger throughout the conversation. Track current phase, technical objective, approved plan, task list, current task, completed tasks, rework items, decisions, assumptions, blockers, and next action.
+
+Expose a brief state snapshot when phase changes, after plan approval, after task approval or rework, when scope changes, after context loss or resume, and whenever the user asks for status. Keep state internal when repeating it would add noise.
+
+Never invent missing state. If prior state is unclear, reconstruct it from visible conversation and repository evidence, then label unknowns explicitly before continuing.
+
 ## Reference Routing
 
 - Read [references/inspection-and-review.md](references/inspection-and-review.md) before analyzing a repository, reviewing user changes, asking for missing context, or validating task completion.
